@@ -1,0 +1,23 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: node
+  namespace: old
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: node
+  replicas: 1 # tells deployment to run 1 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: node
+    spec:
+      containers:
+      - name: node
+        image: 1514150/helloworld:hw
+        ports:
+        - containerPort: 80
+
